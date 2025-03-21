@@ -461,8 +461,15 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     TextInputFormatter.withFunction((oldValue, newValue) {
                       if (newValue.text.isEmpty) return newValue;
-                      if (newValue.text.length < 4) return newValue;
-                      if (!newValue.text.endsWith('000')) return oldValue;
+                      // Si el nuevo caracter es un 0, siempre permitirlo
+                      if (newValue.text.length > oldValue.text.length &&
+                          newValue.text.endsWith('0')) {
+                        return newValue;
+                      }
+                      // Si no es un 0, validar que no haya más de 3 dígitos significativos
+                      String significantDigits =
+                          newValue.text.replaceAll(RegExp(r'0*$'), '');
+                      if (significantDigits.length > 3) return oldValue;
                       return newValue;
                     }),
                   ],
@@ -565,8 +572,15 @@ class _WithdrawalScreenState extends State<WithdrawalScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     TextInputFormatter.withFunction((oldValue, newValue) {
                       if (newValue.text.isEmpty) return newValue;
-                      if (newValue.text.length < 4) return newValue;
-                      if (!newValue.text.endsWith('000')) return oldValue;
+                      // Si el nuevo caracter es un 0, siempre permitirlo
+                      if (newValue.text.length > oldValue.text.length &&
+                          newValue.text.endsWith('0')) {
+                        return newValue;
+                      }
+                      // Si no es un 0, validar que no haya más de 3 dígitos significativos
+                      String significantDigits =
+                          newValue.text.replaceAll(RegExp(r'0*$'), '');
+                      if (significantDigits.length > 3) return oldValue;
                       return newValue;
                     }),
                   ],
