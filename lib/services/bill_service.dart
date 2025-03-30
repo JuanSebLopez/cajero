@@ -4,8 +4,6 @@ class BillService {
     50000: 20,
     20000: 30,
     10000: 40,
-    2000: 50,
-    1000: 100,
   };
 
   static Map<int, int> calculateBills(double amount) {
